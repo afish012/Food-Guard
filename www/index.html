@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <title>Hello World</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="app">
+    <img id="myImage" class="center" src="/img/barcode.png" style="width:300px"></img>
+    <button id="cameraTakePicture" class="center" onclick="cordovaBarcode();">Take Picture</button>
+    <button id="pictureProcess" class="center" onclick="process();">Process Picture</button>
+
+    <p id="result" class="center"></p>
+    <p id="product" class="center"></p>
+    <p id="allergens" class="center"></p>
+  </div>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/quagga.js"></script>
+
+  <script type="text/javascript">
+    app.initialize();
+
+    function process() {
+      Quagga.decodeSingle({
+        decoder: {
+          readers: ["code_128_reader", "ean_reader"] // List of active readers
+        },
+        locate: true, // try to locate the barcode in the image
+        src: document.getElementById('myImage').src, // or 'data:image/jpg;base64,' + data
+      }, function(result) {
+        if (result.codeResult) {
+          console.log("result", result.codeResult.code);
+          document.getElementById("result").innerHTML = "Barcode data = " + result.codeResult.code;
+          getJSON(5054775980437);
+        } else {
+          console.log("not detected");
+        }
+      });
+    }
+
+    ////// OLD BARCODE SCANNING //////
+    function setOptions() {
+      var options = {
+        // Some common settings are 20, 50, and 100
+        quality: 100,
+        destinationType: Camera.DestinationType.FILE_URI,
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        allowEdit: false,
+        correctOrientation: true, //Corrects Android orientation quirks
+        cameraDirection: 1
+
+      }
+      return options;
+    }
+
+    ////// OLD BARCODE SCANNING //////
+    function cameraTakePicture() {
+      navigator.camera.getPicture(onSuccess, onFail, setOptions());
+
+      function onSuccess(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = imageData;
+      }
+
+      function onFail(message) {
+        alert('Failed because: ' + message);
+      }
+    }
+
+    function getJSON(barcode) {
+      //help here (example code) -> https://www.quackit.com/json/tutorial/json_with_http_jquery.cfm
+      $.getJSON("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json", function(result) {
+
+        var status = result.status_verbose;
+
+        if (status == "product not found") {
+          document.getElementById("product").innerHTML = status;
+        } else {
+          var product = result.product.product_name;
+          var allergens = result.product.allergens_tags;
+          document.getElementById("product").innerHTML = "Product Name = " + product;
+          document.getElementById("allergens").innerHTML = "Allergens = " + allergens;
+          document.getElementById("result").innerHTML = "Barcode data = " + barcode;
+        }
+      });
+
+    }
+
+    function cordovaBarcode() {
+      //source = https://www.npmjs.com/package/cordova-plugin-barcodescanner
+      cordova.plugins.barcodeScanner.scan(
+        function(result) {
+          // alert("We got a barcode\n" +
+          //   "Result: " + result.text + "\n" +
+          //   "Format: " + result.format + "\n" +
+          //   "Cancelled: " + result.cancelled);
+          getJSON(result.text);
+        },
+        function(error) {
+          alert("Scanning failed: " + error);
+        }, {
+          showFlipCameraButton: true, // iOS and Android
+          showTorchButton: true, // iOS and Android
+          torchOn: false, // Android, launch with the torch switched on (if available)
+          prompt: "Place a barcode inside the scan area", // Android
+          resultDisplayDuration: 0, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+          disableAnimations: true, // iOS
+          disableSuccessBeep: false, // iOS and Android
+          orientation : "portrait"
+        }
+      );
+    }
+  </script>
+</body>
+
+</html>
