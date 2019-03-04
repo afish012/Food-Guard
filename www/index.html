@@ -47,7 +47,7 @@
   <div class="app">
     <img id="myImage" class="center" src="/img/barcode.png" style="width:300px"></img>
     <button id="cameraTakePicture" class="center" onclick="cordovaBarcode();">Take Picture</button>
-    <button id="pictureProcess" class="center" onclick="process();">Process Picture</button>
+    <!-- <button id="pictureProcess" class="center" onclick="process();">Process Picture</button> -->
 
     <p id="result" class="center"></p>
     <p id="product" class="center"></p>
@@ -55,11 +55,11 @@
   </div>
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
-  <script type="text/javascript" src="js/quagga.js"></script>
 
   <script type="text/javascript">
     app.initialize();
 
+    ////// OLD BARCODE SCANNING //////
     function process() {
       Quagga.decodeSingle({
         decoder: {
