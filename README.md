@@ -1,5 +1,5 @@
 
-#conventions
+# conventions
 
  add javascript to www/js folder
 
