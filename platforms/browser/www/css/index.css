@@ -1,3 +1,7 @@
+* {
+   outline: none;
+}
+
 .center {
   display: block;
   margin-left: auto;
@@ -15,4 +19,39 @@
 #pictureProcess {
   margin: 20px auto;
   padding: 20px;
+}
+
+#bottomMenuContainer {
+   background-color: #0AA099;
+   text-align: center;
+   padding:0px;
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:7.5%;
+   width:100%;
+}
+
+.bottomMenuButton {
+   float: left;
+   display: inline-block;
+   border: none;
+   color: white;
+   background-color: #00BFB5;
+   padding:0px;
+   width:33.3%;
+   height:100%;
+}
+
+.selectedButton {
+   opacity: 0%;
+   background-color: #0AA099;
+}
+
+.appPage {
+   position: absolute;
+}
+
+.hiddenPage {
+   visibility: hidden;
 }

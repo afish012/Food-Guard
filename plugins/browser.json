@@ -63,12 +63,15 @@
         },
         "cordova-plugin-barcodescanner": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         }

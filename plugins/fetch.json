@@ -26,9 +26,9 @@
     "cordova-plugin-file": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-file"
+            "id": "cordova-plugin-file@~4.1.1"
         },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     },
     "cordova-plugin-console": {
@@ -165,6 +165,14 @@
             "id": "cordova-plugin-compat"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-file-transfer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file-transfer@~1.5.0"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }
