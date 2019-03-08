@@ -46,27 +46,40 @@
   <script type="text/javascript" src="js/quagga.js"></script>
   <script type="text/javascript" src="js/barcode.js"></script>
   <script type="text/javascript" src="js/bottomMenuNav.js"></script>
+  <script type="text/javascript" src="js/topMenuNav.js"></script>
 
 </head>
 
 <body>
   <div class="app">
-<!--
-    <img id="myImage" class="center" src="/img/barcode.png" style="width:300px">
-    <button id="cameraTakePicture" class="center" onclick="cordovaBarcode();">Take Picture</button>
-    <button id="pictureProcess" class="center" onclick="process();">Process Picture</button>
+    <div id="topMenuArea" class="hiddenPage">
 
-    <p id="result" class="center"></p>
-    <p id="product" class="center"></p>
-    <p id="allergens" class="center"></p>
--->
-     
-     
-     
+
+     <div id="topMenu">
+       
+
+
+
+
+
+
+
+     </div>
+
+
+     <div id="topMenuClose"></div>
+
+    </div>
+     <div id="topMenuContainer">
+
+      <button id="topMenuButton"><img src="img/menu.png"></button>
+      <div id="topMenuMainContainer"> 
+      <center>Allergy Scanner</center>
+      </div>
+     </div>
      
      <!-- put header content above here -->
-     
-     <!--left page-->
+          <!--left page-->
      <div id="ingredientsPage" class="appPage hiddenPage">
         Ingredients Page!
      </div>
@@ -76,43 +89,19 @@
         Home Page!
      </div>
      
-     
      <!--right page-->
      <div id="scanPage" class="appPage hiddenPage">
         Scan Page!
      </div>
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-	  
-	  
       <!--container for buttons-->
 	  <div id="bottomMenuContainer">
          <button id="ingredientsButton" class="bottomMenuButton">Ingredients</button>
          <button id="homeButton" class="bottomMenuButton selectedButton">Home</button>
          <button id="scanButton" class="bottomMenuButton">Scan</button>
 	  </div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
     </div>
+
+
 </body>
 
 </html>
