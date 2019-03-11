@@ -3,13 +3,6 @@
 
  add javascript to www/js folder
  
- 
- FOOD GUARD PRESENTATION SLIDES
- 
- https://docs.google.com/presentation/d/1_F4luvJ_qT3v-2Tzo01vYcMLp2Y1gJI9MRj4yzdSz6c/edit?usp=sharing
- 
- Firebase integration for phonegap
- https://www.firebase.com/docs/web/quickstart.html
 
 # helpful links
 
