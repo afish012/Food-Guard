@@ -7,7 +7,11 @@
     $(document).ready(function() {
         var url = "http://doc.gold.ac.uk/~shuss020/dbtest/dbtest/www/php/json.php";
         $.getJSON(url, function(result) {
+            
             console.log(result);
+            for(i in result){
+                console.log(result[i].username)
+            }
             $.each(result, function(i, field) {
                 var id = field.id;
                 var username = field.username;

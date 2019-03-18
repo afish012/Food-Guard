@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var url = "http://doc.gold.ac.uk/~shuss020/dbtest/dbtest/www/php/json.php";
+        //Get login database and store as array
+        var result = $.getJSON(url, function(result) {
+            console.log(result);
+            });
+        //On insert attempt compare login details to details in database
+        $("#insert").click(function() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            //Check fields are not blank
+            if ($.trim(username).length > 0 & $.trim(password).length > 0) {
+                console.log("username and password > 1");
+                //Check username and pass
+                for(i in result.responseJSON){
+                    if(username == result.responseJSON[i].username){
+                        console.log("found username");
+                        if(password == result.responseJSON[i].password){
+                            console.log("found username and password");
+                        }
+                    }
+//                    else{
+//                        console.log("login error");
+//                    }
+                }
+            }
+            
+            
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
+        <h1 class="title">Login</h1>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>Username</label>
+            <input type="text" id="username" value="" />
+        </div>
+        <div class="item">
+            <label>Password</label>
+            <input type="text" id="password" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="Sign in" />
+        </div>
+    </div>
+</body>
+
+</html>
