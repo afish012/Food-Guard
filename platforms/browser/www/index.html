@@ -53,19 +53,16 @@
 <body>
   <div class="app">
     <div id="topMenuArea" class="hiddenPage">
+     <div id="topMenu">
+     <div id="topMenuText"> 
+      <a href="#home"style="margin-left: 10%; margin-top:10% ">Log In</a></br>
+     </div>
+      <div class="space"> </div>
+      <a href="#home" style="margin-left: 10%;">History</a></br>
+      <a href="#home" style="margin-left: 10%;">Help</a></br>
+      <a href="about.html" style="margin-left: 10%;">About Us</a></br>
 
-
-      <div id="topMenu">
-
-
-
-
-
-
-
-
-      </div>
-
+     </div>
 
       <div id="topMenuClose"></div>
 
@@ -102,11 +99,19 @@
 
     <!--container for buttons-->
     <div id="bottomMenuContainer">
-      <button id="ingredientsButton" class="bottomMenuButton">Ingredients</button>
-      <button id="homeButton" class="bottomMenuButton selectedButton">Home</button>
-      <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">Scan</button>
+         <button id="ingredientsButton" class="bottomMenuButton">
+        <img src="img/ingredients.png"></br>
+         Ingredients
+         </button>
+         <button id="homeButton" class="bottomMenuButton selectedButton">
+         <img src="img/home.png"></br>
+         Home</button>
+         <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">
+         <img src="img/barcodeicon.png"></br>
+         Scan
+         </button>
     </div>
-  </div>
+    </div>
 
 
 </body>
