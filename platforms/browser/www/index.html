@@ -53,16 +53,16 @@
 <body>
   <div class="app">
     <div id="topMenuArea" class="hiddenPage">
-     <div id="topMenu">
-     <div id="topMenuText"> 
-      <a href="#home"style="margin-left: 10%; margin-top:10% ">Log In</a></br>
-     </div>
-      <div class="space"> </div>
-      <a href="#home" style="margin-left: 10%;">History</a></br>
-      <a href="#home" style="margin-left: 10%;">Help</a></br>
-      <a href="about.html" style="margin-left: 10%;">About Us</a></br>
+      <div id="topMenu">
+        <div id="topMenuText">
+          <a href="#home" style="margin-left: 10%; margin-top:10% ">Log In</a></br>
+        </div>
+        <div class="space"> </div>
+        <a href="#home" style="margin-left: 10%;">History</a></br>
+        <a href="#home" style="margin-left: 10%;">Help</a></br>
+        <a href="about.html" style="margin-left: 10%;">About Us</a></br>
 
-     </div>
+      </div>
 
       <div id="topMenuClose"></div>
 
@@ -78,40 +78,44 @@
     <!-- put header content above here -->
     <!--left page-->
     <div id="ingredientsPage" class="appPage hiddenPage">
-      Ingredients Page!
+      <div class="center">
+        Ingredients Page!
+      </div>
     </div>
 
     <!--middle page-->
     <div id="homePage" class="appPage">
-      Home Page!
+      <div class="center">
+        Home Page!
+      </div>
     </div>
 
     <!--right page-->
     <div id="scanPage" class="appPage hiddenPage">
       <div class="center">
-        <p class="center">Scan Page!</p>
-        <p id="result" class="center"></p>
-        <p id="product" class="center"></p>
-        <p id="allergens" class="center"></p>
+        <p>Scan Page!</p>
+        <p id="result"></p>
+        <p id="product"></p>
+        <p id="allergens"></p>
       </div>
     </div>
 
 
     <!--container for buttons-->
     <div id="bottomMenuContainer">
-         <button id="ingredientsButton" class="bottomMenuButton">
+      <button id="ingredientsButton" class="bottomMenuButton">
         <img src="img/ingredients.png"></br>
-         Ingredients
-         </button>
-         <button id="homeButton" class="bottomMenuButton selectedButton">
-         <img src="img/home.png"></br>
-         Home</button>
-         <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">
-         <img src="img/barcodeicon.png"></br>
-         Scan
-         </button>
+        Ingredients
+      </button>
+      <button id="homeButton" class="bottomMenuButton selectedButton">
+        <img src="img/home.png"></br>
+        Home</button>
+      <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">
+        <img src="img/barcodeicon.png"></br>
+        Scan
+      </button>
     </div>
-    </div>
+  </div>
 
 
 </body>

@@ -6,7 +6,6 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
   text-align: center;
   margin-top: 30px;
 }
@@ -53,6 +52,7 @@
    position: absolute;
    bottom: 7.5%;
    height: 85%;
+   width: 95%;
 }
 
 .hiddenPage {
@@ -106,7 +106,7 @@
   color:white;
 }
 #topMenu li {
-  list-style-type:none; 
+  list-style-type:none;
 }
 #topMenu a {
   color: white;
@@ -124,7 +124,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */      
+  user-select: none;          /* Likely future */
 
 }
 
