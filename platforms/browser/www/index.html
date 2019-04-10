@@ -92,12 +92,50 @@
 
     <!--right page-->
     <div id="scanPage" class="appPage hiddenPage">
-      <div class="center">
-        <p>Scan Page!</p>
+     <!--  <div id="success" class="hidden">
         <p id="result"></p>
         <p id="product"></p>
         <p id="allergens"></p>
-      </div>
+      </div> -->
+        
+
+        <div id="scanpagebody" class="hidden"> 
+        <center><img src="img/face1.png" style="margin-top: 5%;"></center>
+        <br>
+        <center><h2 style="font-size: 35px;">MAY CONTAIN<br>ALLERGENS</h2></center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center><button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners" style="background: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+        </button></center>
+        <br>
+        <!-- Product Info -->
+        <center><button id="productinfo" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners2" style="background: rgba(0,0,0,0.25);">Product Info</div>
+        </button></center>
+        <br>
+        
+        </div>
+
+        <!-- Green -->
+        <div id="success" class="hidden"> 
+        <center><img src="img/face2.png" style="margin-top: 5%;"></center>
+        <br>
+        <center><h2 style="font-size: 35px;"> <p id="product"></p> SAFE TO CONSUME<p id="allergens" class="hidden" style="font-size: 1px;"></p></h2></center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center><button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners" style="background-color: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+        </button></center>
+        <br>
+        <!-- Product Info -->
+        <center><button id="productinfo" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners2" style="background: rgba(0,0,0,0.25);">Product Info</div>
+        </button></center>
+        <br>
+        </div>
+
+
     </div>
 
 

@@ -59,6 +59,11 @@
    visibility: hidden;
 }
 
+.hidden {
+   visibility: hidden;
+}
+
+
 #topMenuContainer{
    background-color: #00BFB5;
    text-align: center;
@@ -149,4 +154,56 @@
 .space{
   height: 4%;
   width: 100%;
+}
+#scanpagebody
+{
+  position: absolute;
+  width: 105%; 
+  height: 102%; 
+  background-color: #F1C40F;
+  margin-top: -0.4%;
+  margin-left:-2%;
+
+}
+
+#success {
+  position: absolute;
+   width: 105%; 
+  height: 102%; 
+  background-color: #2ECC71;
+  margin-top: -0.4%;
+  margin-left:-2%;
+}
+.rcorners {
+  border-radius: 25px;
+  text-align: center;
+  line-height: 200%;
+  vertical-align: middle;
+  padding: 20px; 
+  width: 200px;
+  height: 35px; 
+  color: white;
+  font-size: 20px;
+}
+.rcorners2 {
+  border-radius: 25px;
+  text-align: center;
+  line-height: 120%;
+  vertical-align: middle;
+  padding: 20px; 
+  width: 115px;
+  height: 15px; 
+  color: white;
+  font-size: 20px;
+}
+.rcorners3 {
+  border-radius: 25px;
+  text-align: center;
+  line-height: 120%;
+  vertical-align: middle;
+  padding: 20px; 
+  width: 115px;
+  height: 15px; 
+  color: white;
+  font-size: 20px;
 }
