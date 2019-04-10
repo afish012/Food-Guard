@@ -55,8 +55,7 @@
     <div id="topMenuArea" class="hiddenPage">
 
 
-     <div id="topMenu">
-       
+      <div id="topMenu">
 
 
 
@@ -64,42 +63,50 @@
 
 
 
-     </div>
+
+      </div>
 
 
-     <div id="topMenuClose"></div>
+      <div id="topMenuClose"></div>
 
     </div>
-     <div id="topMenuContainer">
+    <div id="topMenuContainer">
 
       <button id="topMenuButton"><img src="img/menu.png"></button>
-      <div id="topMenuMainContainer"> 
-      <center>Allergy Scanner</center>
+      <div id="topMenuMainContainer">
+        <center>Allergy Scanner</center>
       </div>
-     </div>
-     
-     <!-- put header content above here -->
-          <!--left page-->
-     <div id="ingredientsPage" class="appPage hiddenPage">
-        Ingredients Page!
-     </div>
-     
-     <!--middle page-->
-     <div id="homePage" class="appPage">
-        Home Page!
-     </div>
-     
-     <!--right page-->
-     <div id="scanPage" class="appPage hiddenPage">
-        Scan Page!
-     </div>
-      <!--container for buttons-->
-	  <div id="bottomMenuContainer">
-         <button id="ingredientsButton" class="bottomMenuButton">Ingredients</button>
-         <button id="homeButton" class="bottomMenuButton selectedButton">Home</button>
-         <button id="scanButton" class="bottomMenuButton">Scan</button>
-	  </div>
     </div>
+
+    <!-- put header content above here -->
+    <!--left page-->
+    <div id="ingredientsPage" class="appPage hiddenPage">
+      Ingredients Page!
+    </div>
+
+    <!--middle page-->
+    <div id="homePage" class="appPage">
+      Home Page!
+    </div>
+
+    <!--right page-->
+    <div id="scanPage" class="appPage hiddenPage">
+      <div class="center">
+        <p class="center">Scan Page!</p>
+        <p id="result" class="center"></p>
+        <p id="product" class="center"></p>
+        <p id="allergens" class="center"></p>
+      </div>
+    </div>
+
+
+    <!--container for buttons-->
+    <div id="bottomMenuContainer">
+      <button id="ingredientsButton" class="bottomMenuButton">Ingredients</button>
+      <button id="homeButton" class="bottomMenuButton selectedButton">Home</button>
+      <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">Scan</button>
+    </div>
+  </div>
 
 
 </body>
