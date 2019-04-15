@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Blank App</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js">
+        </script>
+        <script type="text/javascript" charset="utf-8">
+                document.addEventListener("deviceready", onDeviceReady, false);
+
+                function onDeviceReady() {
+                    var ref = window.open('http://doc.gold.ac.uk/~shuss020/dbtest/www/index.html', '_self ', 'location=no');
+                    ref.addEventListener( "loadstop", function(){
+       var loop = window.setInterval(function(){
+           ref.executeScript({
+                   code: "user"               },
+               function(values){
+                   if(values[0]){
+                    user = values[0]
+                     alert(values[0].username);
+                     localStorage.user = values[0].id;
+                     ref.close();
+                     window.clearInterval(loop);
+                     window.location.replace("home.html");
+                   }
+               }
+           );
+       },100);
+   });
+
+                }
+            </script>
+
+    </body>
+</html>

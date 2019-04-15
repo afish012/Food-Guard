@@ -1,1 +1,0 @@
-https://medium.com/@devquora/creating-crud-app-in-phone-gap-using-php-mysql-fff06bfe36c1
