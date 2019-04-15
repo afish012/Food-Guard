@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log(localStorage);
+        var id = localStorage.id;
+                var username = localStorage.username;
+                var email = localStorage.email;
+                var password = localStorage.password;
+                $("#listview").append("<a class='item' href='form.html?id=" + id + "&username=" + username + "&email=" + email + "&password=" + password + "'><h2>" + "Current password: " + password + "</h2>" + "<h2>" + "Current username: " + username + "</h2>" + "<h2>" + "Current email: " +email + "</h2></a>");
+        console.log(localStorage);
+        var url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/json.php";
+        $.getJSON(url, function(result) {
+            
+            console.log(result);
+            for(i in result){
+                console.log("usernames are: " + result[i].username)
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: red">
+        <a href="index.html" class="button button-clear">Home</a>
+        <h1 class="title">Single user check</h1>
+    </div>
+    <br/>
+    <br/>
+    <ul class="list" id="listview">
+    </ul>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<html>
+
+<head>
+<title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log(localStorage);
+        //Clear local login details on new sign in
+        localStorage.clear();
+        console.log(localStorage);
+        var url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/json.php";
+        //Get login database and store as array
+        var result = $.getJSON(url, function(result) {
+            console.log(result);
+            });
+        
+        //On insert attempt compare login details to details in database
+        $("#insert").click(function() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var found = false;
+            //Check fields are not blank
+            if ($.trim(username).length > 0 & $.trim(password).length > 0) {
+                console.log("username and password > 1");
+                //Check username and pass
+                for(i in result.responseJSON){
+                    if(username == result.responseJSON[i].username){
+                        console.log("found username");
+                        found = true;
+                        if(password == result.responseJSON[i].password){
+                            localStorage.username = username;
+                            localStorage.password = password;
+                            localStorage.email = result.responseJSON[i].email;
+                            localStorage.id = result.responseJSON[i].id;
+                            console.log("found username and password");
+                            console.log(localStorage);
+                            
+                            //Once signed in go to page with user's saved allergies
+//                            window.location.replace("http://google.com");
+                            user = {username:localStorage.username, password:localStorage.password, id:localStorage.id};
+//                            localStorage.username = "user1"; console.log(window.shouldClose);
+
+                        }
+                    }
+                }
+                if(found === false){
+                        console.log("login error - user not found");
+                    }
+            }
+            
+            
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
+        <h1 class="title">Login</h1>
+        <a class="button button-clear" href="checkdetails.html">Check account</a>
+        <a class="button button-clear" href="index.html">Sign up</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>Username</label>
+            <input type="text" id="username" value="" />
+        </div>
+        <div class="item">
+            <label>Password</label>
+            <input type="text" id="password" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="Sign in" />
+        </div>
+    </div>
+</body>
+
+</html>

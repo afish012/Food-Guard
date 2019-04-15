@@ -1,0 +1,149 @@
+<html>
+
+<head>
+<title>Login</title>
+   
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log(localStorage);
+        localStorage.clear();
+        localStorage.id = 13;
+        var field_ids = [];
+        //Create allergy array to send to phonegap
+        var pg_allergy = [];
+        pg_allergies = [];
+        console.log(field_ids);
+        console.log(localStorage);
+        
+        //Get data from allergies table and user_allergies table
+        var url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/user_allergies.php";
+        var allergies_url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/allergies.php";
+        $.when(
+            $.getJSON(url),
+            $.getJSON(allergies_url)
+        ).done(function(user_allergies, allergies){
+            console.log(user_allergies[0]);
+//            console.log(allergies[0]);
+            
+        //Create checklist of all allergies in database
+            for(i in allergies[0]){
+                var allergy = allergies[0][i].allergy;
+                $("#allergy_list").append("<input type='checkbox' name='"+allergy+"' value='" + allergies[0][i].allergy_id + "'> " + allergy +"<br>");
+            };
+
+        //If current user id is found in user_allergies table, get each allergy id and match with
+        //name of allergy from the allergies table and then tick checkbox in list
+        if(localStorage.length != 0){
+            $allergies = [];
+            for(i in user_allergies[0]){
+                if(localStorage.id == user_allergies[0][i].user_id){
+                    for(j in allergies[0]){
+                        if(user_allergies[0][i].allergy_id == allergies[0][j].allergy_id){
+                            console.log(allergies[0][j].allergy);
+                            $('input[name="'+allergies[0][j].allergy+'"]').attr("checked", "checked")
+                            $("#listview").append("<p>" + "User " + localStorage.id + " has allergy : " + allergies[0][j].allergy + "</p>");
+                            pg_allergies.push(allergies[0][j].allergy);
+                            pg_allergy.push(allergies[0][j].allergy);
+                            console.log(pg_allergies);
+                        }
+                    }
+                }
+            }
+        }
+        else if(localStorage.length === 0){
+            console.log("Error: unable to find user details.")
+        }
+            
+    //Update user specific allegies on submit
+      $('input[value="Submit"]').click(function(){
+          //Add field_ids in local array
+            field_ids = [];
+            for(i in user_allergies[0]){
+                if(user_allergies[0][i].user_id == localStorage.id){
+                    field_ids.push(user_allergies[0][i].id)
+                }
+            }
+            var $checked = $('input[ type="checkbox"]:checked');
+            var length = $checked.length;
+            var user_id = localStorage.id;
+    
+            console.log(length + " allergies selected");
+          
+    //Delete records in allergy database linked to current user id 
+            for(i in field_ids){
+                var id = field_ids[i]; 
+                var dataString = "id=" + id + "&delete=";
+                console.log(dataString);
+                $.ajax({
+                type: "GET",
+                url: "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/delete_ua.php",
+                data: dataString,
+                crossDomain: true,
+                cache: false,
+                beforeSend: function() {
+                    $("#submit").val('Connecting...');
+                },
+                success: function(data) {
+                    if (data == "success") {
+//                        alert("Deleted");
+                        console.log("Deleted");
+                        $("#submit").val("Deleted");
+                    } 
+                    else if (data == "error") {
+                        alert("error");
+                    }
+                }
+                });
+            }
+          
+        //Add new records to user allergy database
+            for(i=0; i<length; i++){
+                console.log($checked[i].name + " - " + $checked[i].value);
+                var user_id = localStorage.id;
+                var allergy_id = $checked[i].value;
+                var dataString = "user_id=" + user_id + "&allergy_id=" + allergy_id + "&submit=";
+                console.log(dataString);
+                $.ajax({
+                    type: "POST",
+                    url: "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/submit.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#submit").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+//                            alert("inserted");
+                            console.log("submitted");
+                            console.log(data);
+                            $("#submit").val('Submitted');
+                        } else if (data == "error") {
+                            alert("error");
+                            console.log("error");
+                            console.log(data);
+                        }
+                    }
+                });
+            }
+    //Reload page afer submission
+        location.reload();
+    });
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <p>User Allergies(check console)</p>
+    <ul class="list" id="listview">
+    </ul>
+    <div id="allergy_list">
+        <input type="submit" value="Submit" id="submit"><br>
+    </div>
+    
+
+</body>
+
+</html>

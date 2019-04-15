@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<title>Sign Up Page</title>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#insert").click(function() {
+            var username = $("#username").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            var dataString = "username=" + username + "&email=" + email + "&password=" + password + "&insert=";
+            console.log(dataString);
+            if ($.trim(username).length > 0 & $.trim(email).length > 0 & $.trim(password).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/insert.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function() {
+                        $("#insert").val('Connecting...');
+                    },
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            console.log("inserted");
+                            console.log(data);
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                            console.log("error");
+                            console.log(data);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
+        <h1 class="title">Sign up</h1>
+        <a class="button button-clear" href="readjson.html">Read All Data</a>
+        <a class="button button-clear" href="login.html">Sign in</a>
+    </div>
+    <br/>
+    <br/>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>Username</label>
+            <input type="text" id="username" value="" />
+        </div>
+        <div class="item">
+            <label>Email</label>
+            <input type="text" id="email" value="" />
+        </div>
+        <div class="item">
+            <label>Password</label>
+            <input type="text" id="password" value="" />
+        </div>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block" value="Insert" />
+        </div>
+    </div>
+</body>
+
+</html>
