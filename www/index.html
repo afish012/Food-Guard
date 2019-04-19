@@ -52,6 +52,9 @@
 
 <body>
   <div class="app">
+   
+    <!-- begin menu html -->
+    <!-- MENU DISPLAYED WHEN BUTTON CLICKED -->
     <div id="topMenuArea" class="hiddenPage">
       <div id="topMenu">
         <div id="topMenuText">
@@ -63,19 +66,19 @@
         <a href="about.html" style="margin-left: 10%;">About Us</a></br>
 
       </div>
-
-      <div id="topMenuClose"></div>
-
+      <div id="topMenuClose"></div> <!-- see-through div for closing the menu after it opens -->
     </div>
-    <div id="topMenuContainer">
 
-      <button id="topMenuButton"><img src="img/menu.png"></button>
-      <div id="topMenuMainContainer">
+    <!-- actual menu bar at top of screen -->
+    <div id="topMenuContainer">
+      <button id="topMenuButton"><img src="img/menu.png"></button> <!-- button to open -->
+      <div id="topMenuMainContainer"> <!-- div for title -->
         <center>Allergy Scanner</center>
       </div>
     </div>
+    <!-- end menu html -->
 
-    <!-- put header content above here -->
+
     <!--left page-->
     <div id="ingredientsPage" class="appPage hiddenPage">
       <div class="center">
@@ -139,7 +142,7 @@
     </div>
 
 
-    <!--container for buttons-->
+    <!--container for bottom menu buttons-->
     <div id="bottomMenuContainer">
       <button id="ingredientsButton" class="bottomMenuButton">
         <img src="img/ingredients.png"></br>
@@ -153,6 +156,8 @@
         Scan
       </button>
     </div>
+    <!--end button container -->
+
   </div>
 
 
