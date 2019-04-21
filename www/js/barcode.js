@@ -1,4 +1,5 @@
 app.initialize();
+//getJSON("5000328583839");
 
 function getJSON(barcode) {
   //help here (example code) -> https://www.quackit.com/json/tutorial/json_with_http_jquery.cfm
@@ -15,8 +16,23 @@ function getJSON(barcode) {
     } else {
       var product = result.product.product_name;
       var allergens = result.product.allergens_tags;
+      var image = result.product.image_url;
+
+      if(image == null){
+        image = "img/default-thumbnail.png";
+      }
+
+      var ingredients = result.product.ingredients_text;
+
+      if(ingredients == null){
+        ingredients = "Ingredients data not available";
+      }
+
       document.getElementById("product").innerHTML = product;
+      document.getElementById("prodTitle").innerHTML = product;
       document.getElementById("allergens").innerHTML = "Allergens = " + allergens;
+      document.getElementById("prodImg").src = image;
+      document.getElementById("prodIng").innerHTML = ingredients;
       // document.getElementById("result").innerHTML = "Barcode data = " + barcode;
       $("#scanpagebody").addClass("hidden")
       $("#success").removeClass("hidden")
