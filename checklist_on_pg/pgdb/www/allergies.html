@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Blank App</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js">
+        </script>
+        <div>
+            <iframe id="iframe" src="http://doc.gold.ac.uk/~shuss020/dbtest/www/user_allergies.html" width="1081" height="681" autofocus="true"></iframe>
+        </div>
+<!--
+        <script type="text/javascript" charset="utf-8">
+                document.addEventListener("deviceready", onDeviceReady, false);
+                function onDeviceReady() {
+                    var ref = window.open('http://doc.gold.ac.uk/~shuss020/dbtest/www/user_allergies.html', '_self ', 'location=no');
+                    ref.addEventListener( "loadstop", function(){
+       var loop = window.setInterval(function(){
+           ref.executeScript({
+                   code: "pg_allergies"               },
+               function(values){
+                   if(values[0]){
+                    user = values[0]
+                     alert(values[0][1]);
+                     localStorage.allergies = values[0];
+                     ref.close();
+                     window.clearInterval(loop);
+                     window.location.replace("ua.html");
+                   }
+               }
+           );
+       },100);
+   });
+                }
+            </script>
+-->
+
+    </body>
+</html>

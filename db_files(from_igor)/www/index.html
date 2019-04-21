@@ -2,7 +2,8 @@
 
 <head>
 <title>Sign Up Page</title>
-    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+<!--    <link rel="stylesheet" type="text/css" href="css/ionic.css">-->
+    <link rel="stylesheet" type="text/css" href="login.css">
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
@@ -43,30 +44,37 @@
 </head>
 
 <body>
+    <div id="logo">
+    <div id="logowrapper">
+        <img src="img/logo.png">
+    </div>
+<!--
     <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
         <h1 class="title">Sign up</h1>
         <a class="button button-clear" href="readjson.html">Read All Data</a>
         <a class="button button-clear" href="login.html">Sign in</a>
     </div>
-    <br/>
-    <br/>
+-->
+    <br>
+    <br>
     <div class="list">
         <input type="hidden" id="id" value="" />
         <div class="item">
-            <label>Username</label>
-            <input type="text" id="username" value="" />
+            <center><input type="text" id="username" value="" placeholder="Enter Username"  style="width: 50%; height: 32px; border-radius: 25px; overflow: hidden; outline: none;" /></center>
         </div>
+        <br>
         <div class="item">
-            <label>Email</label>
-            <input type="text" id="email" value="" />
+            <center><input type="text" id="email" value="" placeholder="Enter Email" style="width: 50%; height: 32px; border-radius: 25px;overflow: hidden; outline: none;"/></center>
         </div>
+        <br>
         <div class="item">
-            <label>Password</label>
-            <input type="text" id="password" value="" />
+            <center><input type="text" id="password" value="" placeholder="Enter Password" style="width: 50%; height: 32px; border-radius: 25px;overflow: hidden; outline: none;"/></center>
         </div>
+        <br>
         <div class="item">
-            <input type="button" id="insert" class="button button-block" value="Insert" />
+            <center><input type="button" id="insert" class="button button-block" value="Sign Up" style="width: 25%; height: 32px; border-radius: 25px; outline: none; background-color: white;"/> </center>
         </div>
+    </div>
     </div>
 </body>
 

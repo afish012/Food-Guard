@@ -6,12 +6,12 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        console.log(localStorage);
-        localStorage.clear();
-        localStorage.id = 13;
+        console.log("cur id is " +localStorage.id);
+//        localStorage.clear();
+//        localStorage.id = 2;
         var field_ids = [];
         //Create allergy array to send to phonegap
-        var pg_allergy = [];
+//        var pg_allergy = [];
         pg_allergies = [];
         console.log(field_ids);
         console.log(localStorage);
@@ -44,7 +44,7 @@
                             $('input[name="'+allergies[0][j].allergy+'"]').attr("checked", "checked")
                             $("#listview").append("<p>" + "User " + localStorage.id + " has allergy : " + allergies[0][j].allergy + "</p>");
                             pg_allergies.push(allergies[0][j].allergy);
-                            pg_allergy.push(allergies[0][j].allergy);
+//                            pg_allergy.push(allergies[0][j].allergy);
                             console.log(pg_allergies);
                         }
                     }

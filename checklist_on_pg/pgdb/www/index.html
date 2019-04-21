@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <title>Hello World</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="js/quagga.js"></script>
+  <script type="text/javascript" src="js/barcode.js"></script>
+  <script type="text/javascript" src="js/bottomMenuNav.js"></script>
+  <script type="text/javascript" src="js/topMenuNav.js"></script>
+
+</head>
+
+<body>
+  <div class="app">
+    <div id="topMenuArea" class="hiddenPage">
+      <div id="topMenu">
+        <div id="topMenuText">
+          <a href="#home" style="margin-left: 10%; margin-top:10% ">Log In</a></br>
+        </div>
+        <div class="space"> </div>
+        <a href="#home" style="margin-left: 10%;">History</a></br>
+        <a href="#home" style="margin-left: 10%;">Help</a></br>
+        <a href="about.html" style="margin-left: 10%;">About Us</a></br>
+
+      </div>
+
+      <div id="topMenuClose"></div>
+
+    </div>
+    <div id="topMenuContainer">
+
+      <button id="topMenuButton"><img src="img/menu.png"></button>
+      <div id="topMenuMainContainer">
+        <center>Allergy Scanner</center>
+      </div>
+    </div>
+
+    <!-- put header content above here -->
+    <!--left page-->
+    <div id="ingredientsPage" class="appPage hiddenPage">
+      <div class="center">
+        Ingredients Page!
+          <iframe id="iframe" src="http://doc.gold.ac.uk/~shuss020/dbtest/www/user_allergies.html" frameborder="0" scrolling="yes"></iframe>
+      </div>
+    </div>
+
+    <!--middle page-->
+    <div id="homePage" class="appPage">
+      <div class="center">
+        Home Page!
+      </div>
+    </div>
+
+    <!--right page-->
+    <div id="scanPage" class="appPage hiddenPage">
+     <!--  <div id="success" class="hidden">
+        <p id="result"></p>
+        <p id="product"></p>
+        <p id="allergens"></p>
+      </div> -->
+        
+
+        <div id="scanpagebody" class="hidden"> 
+        <center><img src="img/face1.png" style="margin-top: 5%;"></center>
+        <br>
+        <center><h2 style="font-size: 35px;">MAY CONTAIN<br>ALLERGENS</h2></center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center><button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners" style="background: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+        </button></center>
+        <br>
+        <!-- Product Info -->
+        <center><button id="productinfo" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners2" style="background: rgba(0,0,0,0.25);">Product Info</div>
+        </button></center>
+        <br>
+        
+        </div>
+
+        <!-- Green -->
+        <div id="success" class="hidden"> 
+        <center><img src="img/face2.png" style="margin-top: 5%;"></center>
+        <br>
+        <center><h2 style="font-size: 35px;"> <p id="product"></p> SAFE TO CONSUME<p id="allergens" class="hidden" style="font-size: 1px;"></p></h2></center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center><button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners" style="background-color: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+        </button></center>
+        <br>
+        <!-- Product Info -->
+        <center><button id="productinfo" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+        <div class="rcorners2" style="background: rgba(0,0,0,0.25);">Product Info</div>
+        </button></center>
+        <br>
+        </div>
+
+
+    </div>
+
+
+    <!--container for buttons-->
+    <div id="bottomMenuContainer">
+      <button id="ingredientsButton" class="bottomMenuButton">
+        <img src="img/ingredients.png"></br>
+        Ingredients
+      </button>
+      <button id="homeButton" class="bottomMenuButton selectedButton">
+        <img src="img/home.png"></br>
+        Home</button>
+      <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">
+        <img src="img/barcodeicon.png"></br>
+        Scan
+      </button>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
