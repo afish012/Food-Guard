@@ -45,7 +45,7 @@
 
 
 
-  <title>Hello World</title>
+  <title>Food Guard</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="cordova.js"></script>
   <script type="text/javascript" src="js/index.js"></script>
@@ -118,7 +118,11 @@
     <!--middle page-->
     <div id="homePage" class="appPage">
       <div class="center">
-        Home Page!
+        <div id="scans">
+			<!-- is populated by javascript -->
+        </div>
+        <br>
+        <button id="del" onclick="delRecentScans_All()">Delete All Scans</button>
       </div>
     </div>
 
