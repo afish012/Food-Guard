@@ -37,8 +37,14 @@
     * Create your own at http://cspisawesome.com
     -->
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+
+
   <title>Hello World</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="cordova.js"></script>
@@ -46,73 +52,175 @@
   <script type="text/javascript" src="js/quagga.js"></script>
   <script type="text/javascript" src="js/barcode.js"></script>
   <script type="text/javascript" src="js/bottomMenuNav.js"></script>
+  <script type="text/javascript" src="js/topMenuNav.js"></script>
+  <script type="text/javascript" src="js/storage.js"></script>
 
 </head>
 
 <body>
   <div class="app">
-<!--
-    <img id="myImage" class="center" src="/img/barcode.png" style="width:300px">
-    <button id="cameraTakePicture" class="center" onclick="cordovaBarcode();">Take Picture</button>
-    <button id="pictureProcess" class="center" onclick="process();">Process Picture</button>
 
-    <p id="result" class="center"></p>
-    <p id="product" class="center"></p>
-    <p id="allergens" class="center"></p>
--->
-     
-     
-     
-     
-     <!-- put header content above here -->
-     
-     <!--left page-->
-     <div id="ingredientsPage" class="appPage hiddenPage">
-        Ingredients Page!
-     </div>
-     
-     <!--middle page-->
-     <div id="homePage" class="appPage">
-        Home Page!
-     </div>
-     
-     
-     <!--right page-->
-     <div id="scanPage" class="appPage hiddenPage">
-        Scan Page!
-     </div>
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-	  
-	  
-      <!--container for buttons-->
-	  <div id="bottomMenuContainer">
-         <button id="ingredientsButton" class="bottomMenuButton">Ingredients</button>
-         <button id="homeButton" class="bottomMenuButton selectedButton">Home</button>
-         <button id="scanButton" class="bottomMenuButton">Scan</button>
-	  </div>
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+    <!-- begin menu html -->
+    <!-- MENU DISPLAYED WHEN BUTTON CLICKED -->
+    <div id="topMenuArea" class="hiddenPage">
+      <div id="topMenu">
+        <div id="topMenuText">
+          <a href="login.html" style="margin-left: 10%; margin-top:10% ">Log In</a></br>
+        </div>
+        <div class="space"> </div>
+        <a href="#home" style="margin-left: 10%;">History</a></br>
+        <a href="#home" style="margin-left: 10%;">Help</a></br>
+        <a href="about.html" style="margin-left: 10%;">About Us</a></br>
+
+      </div>
+      <div id="topMenuClose"></div> <!-- see-through div for closing the menu after it opens -->
     </div>
+
+    <!-- actual menu bar at top of screen -->
+    <div id="topMenuContainer">
+      <button id="topMenuButton"><img src="img/menu.png"></button> <!-- button to open -->
+      <div id="topMenuMainContainer">
+        <!-- div for title -->
+        <center>Allergy Scanner</center>
+      </div>
+    </div>
+    <!-- end menu html -->
+
+
+    <!--left page-->
+    <div id="ingredientsPage" class="appPage hiddenPage">
+      <div class="center" style="overflow-y: scroll; height:660px; margin-top: -2.5px;">
+        <h2>Ingredients Page!</h2>
+        <div class="scrolla">
+          <form name="allergyForm" class="allergyList" method="get" onsubmit="submitAller()">
+            <label class="container">Gluten
+              <input id="Gluten" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">Peanuts
+              <input id="Peanuts" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">Seafood
+              <input id="Seafood" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">Strawberry
+              <input id="Strawberry" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <input class="rcorners" type="submit" value="Submit">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--middle page-->
+    <div id="homePage" class="appPage">
+      <div class="center">
+        Home Page!
+      </div>
+    </div>
+
+    <!--right page-->
+    <div id="scanPage" class="appPage hiddenPage">
+      <!--  <div id="success" class="hidden">
+        <p id="result"></p>
+        <p id="product"></p>
+        <p id="allergens"></p>
+      </div> -->
+
+
+      <div id="scanpagebody" class="hidden">
+        <center><img src="img/face1.png" style="margin-top: 5%;"></center>
+        <br>
+        <center>
+          <h2 style="font-size: 35px;">MAY CONTAIN<br>ALLERGENS</h2>
+        </center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center><button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+            <div class="rcorners" style="background: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+          </button></center>
+        <br>
+
+      </div>
+
+      <!-- Green -->
+      <div id="success" class="hidden">
+        <center><img src="img/face2.png" style="margin-top: 5%;"></center>
+        <br>
+        <center>
+          <h2 style="font-size: 35px;">
+            <p id="product"></p> SAFE TO CONSUME<p id="allergens" class="hidden" style="font-size: 1px;"></p>
+          </h2>
+        </center>
+        <br>
+        <!-- Scan Another Barcode -->
+        <center>
+          <button id="scanbutton2" style="background-color: rgba(0,0,0,0); border: none;" onclick="cordovaBarcode()">
+            <div class="rcorners" style="background-color: rgba(0,0,0,0.25);">Scan Another Barcode</div>
+          </button>
+        </center>
+        <br>
+        <!-- Product Info -->
+        <center>
+          <button id="productinfo" style="background-color: rgba(0,0,0,0); border: none;" data-toggle="modal" data-target="#myModal">
+            <div class="rcorners2" style="background: rgba(0,0,0,0.25);">Product Info</div>
+          </button>
+        </center>
+        <br>
+
+        <!-- <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button> -->
+
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="prodTitle" class="modal-title"></h4>
+              </div>
+              <div class="modal-body">
+                <img id="prodImg" src="img/default-thumbnail.jpg">
+                <center>
+                  <p id="prodIng"></p>
+                </center>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!--container for bottom menu buttons-->
+    <div id="bottomMenuContainer">
+      <button id="ingredientsButton" class="bottomMenuButton">
+        <img src="img/ingredients.png"></br>
+        Ingredients
+      </button>
+      <button id="homeButton" class="bottomMenuButton selectedButton">
+        <img src="img/home.png"></br>
+        Home</button>
+      <button id="scanButton" class="bottomMenuButton" onclick="cordovaBarcode();">
+        <img src="img/barcodeicon.png"></br>
+        Scan
+      </button>
+    </div>
+    <!--end button container -->
+
+  </div>
+
+
 </body>
 
 </html>
