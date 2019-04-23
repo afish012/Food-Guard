@@ -30,7 +30,6 @@
                                     localStorage.setItem('allergies', JSON.stringify(values[0].allergies));
                                     user_allergies = JSON.parse(localStorage.getItem('allergies'));
                                     alert(user_allergies[0]);
-//                                    alert(getAllergies(localStorage)[0])
                                     ref.close();
                                     window.clearInterval(loop);
                                     window.location.replace("home.html");
