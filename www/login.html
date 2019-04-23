@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Login Page</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js">
+        </script>
+        <script type="text/javascript" src="js/getAllergies.js">
+        </script>
+        <script type="text/javascript" charset="utf-8">
+            document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                var ref = window.open('http://doc.gold.ac.uk/~shuss020/dbtest/www/login.html', '_self ', 'location=no');
+                ref.addEventListener( "loadstop", function(){
+                        var loop = window.setInterval(function(){
+                            ref.executeScript({
+                            code: "user"               },
+                            function(values){
+                                if(values[0]){
+                                    user = values[0]
+//                                    alert("username: " + values[0].username);
+//                                    alert("password: " + values[0].password);
+//                                    alert("email: " + values[0].email);
+//                                    alert("id: " + values[0].id);
+//                                    alert("allergies: " + values[0].allergies);
+                                    localStorage.id = values[0].id;
+                                    localStorage.setItem('allergies', JSON.stringify(values[0].allergies));
+                                    user_allergies = JSON.parse(localStorage.getItem('allergies'));
+//                                    alert(user_allergies[0]);
+                                    ref.close();
+                                    window.clearInterval(loop);
+                                    window.location.replace("index.html");
+                                    }
+                            }
+                            );
+                    },100);
+                });
+            }
+        </script>
+
+    </body>
+</html>
