@@ -1,18 +1,18 @@
-$(document).ready(function() {
-   
-   //need a function to detect when a button with the class 'bottomMenuButton' has been clicked
-   
-   $("#topMenuButton").click(function() {
-            $("#topMenuArea").removeClass("hiddenPage");
-  
-      
-   });
+$(document).ready(function () {
 
-   $("#topMenuClose").click(function() {
-            $("#topMenuArea").addClass("hiddenPage");
-  
-      
-   });
+    //need a function to detect when a button with the class 'bottomMenuButton' has been clicked
 
-   
+    $("#topMenuButton").click(function () {
+        $("#topMenuArea").removeClass("hiddenPage");
+
+
+    });
+
+    $("#topMenuClose").click(function () {
+        $("#topMenuArea").addClass("hiddenPage");
+
+
+    });
+
+
 });
