@@ -191,6 +191,15 @@ body {
   margin-left: -2%;
 }
 
+#danger {
+  position: absolute;
+  width: 110%;
+  height: 103%;
+  background-color: red;
+  margin-top: -0.5%;
+  margin-left: -2%;
+}
+
 .rcorners {
   border-radius: 25px;
   text-align: center;

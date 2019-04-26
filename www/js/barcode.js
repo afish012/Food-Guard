@@ -1,7 +1,14 @@
+//Run this script as soon as 
 app.initialize();
-//getJSON("5000328583839");
-//getJSON("5000184321606");
+//Grabs allergens from allergy page iframe
+var data;
+window.addEventListener('message',function(event){
+    var key = event.message ? 'message' : 'data';
+    data = event[key];
+    localStorage.setObj('allergies', data);
+}, false);
 
+//Uses the json api to lookup inputted barcode number, this then sets all the html elements to corresponding data and also handles the allergy detection logi
 function getJSON(barcode) {
   //help here (example code) -> https://www.quackit.com/json/tutorial/json_with_http_jquery.cfm
   $.getJSON("https://world.openfoodfacts.org/api/v0/product/" + barcode + ".json", function(result) {
@@ -17,6 +24,9 @@ function getJSON(barcode) {
     } else {
       var product = result.product.product_name;
       var allergens = result.product.allergens_tags;
+      var danger = false;
+        var matched = [];
+        
       localStorage.ffAllergens = null;
       localStorage.ffAllergens = allergens;
       localStorage.ffAllergens = localStorage.ffAllergens.replace(/en:/g, "");
@@ -26,10 +36,59 @@ function getJSON(barcode) {
       for(i in ffArray){
           for(j in dbAll){
              if(ffArray[i] == dbAll[j]){
-                alert(ffArray[i]);
+                danger = true;
+                 matched.push(ffArray[i]);
              } 
           }
       }
+        
+        if(danger){
+            var image = result.product.image_url;
+
+      if(image == null){
+        image = "img/default-thumbnail.png";
+      }
+
+      var ingredients = result.product.ingredients_text;
+
+      if(ingredients == null){
+        ingredients = "Ingredients data not available";
+      }
+            
+      document.getElementById("product").innerHTML = product;
+            document.getElementById("containedAllergies").innerHTML = "This product contains: " + matched;
+      document.getElementById("prodTitle").innerHTML = product;
+      document.getElementById("allergens").innerHTML = "Allergens = " + allergens;
+      document.getElementById("prodImg").src = image;
+      document.getElementById("prodIng").innerHTML = ingredients;
+      // document.getElementById("result").innerHTML = "Barcode data = " + barcode;
+      $("#scanpagebody").addClass("hidden")
+            $("#success").addClass("hidden")
+      $("#danger").removeClass("hidden")
+        }
+        else{
+            var image = result.product.image_url;
+
+      if(image == null){
+        image = "img/default-thumbnail.png";
+      }
+
+      var ingredients = result.product.ingredients_text;
+
+      if(ingredients == null){
+        ingredients = "Ingredients data not available";
+      }
+
+      document.getElementById("product").innerHTML = product;
+      document.getElementById("prodTitle").innerHTML = product;
+      document.getElementById("allergens").innerHTML = "Allergens = " + allergens;
+      document.getElementById("prodImg").src = image;
+      document.getElementById("prodIng").innerHTML = ingredients;
+      // document.getElementById("result").innerHTML = "Barcode data = " + barcode;
+      $("#scanpagebody").addClass("hidden")
+            $("#danger").addClass("hidden")
+      $("#success").removeClass("hidden")
+        }
           
       var image = result.product.image_url;
 
