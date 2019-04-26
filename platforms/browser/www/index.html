@@ -54,6 +54,7 @@
   <script type="text/javascript" src="js/bottomMenuNav.js"></script>
   <script type="text/javascript" src="js/topMenuNav.js"></script>
   <script type="text/javascript" src="js/storage.js"></script>
+  <script type="text/javascript" src="js/getAllergies.js"></script>
     
 
 </head>
@@ -92,27 +93,7 @@
     <div id="ingredientsPage" class="appPage hiddenPage">
       <div class="center" style="overflow-y: scroll; height:660px; margin-top: -2.5px;">
         <h2>Ingredients Page!</h2>
-        <div class="scrolla">
-          <form name="allergyForm" class="allergyList" method="get" onsubmit="submitAller()">
-            <label class="container">Gluten
-              <input id="Gluten" type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Peanuts
-              <input id="Peanuts" type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Seafood
-              <input id="Seafood" type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Strawberry
-              <input id="Strawberry" type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <input class="rcorners" type="submit" value="Submit">
-          </form>
-        </div>
+        <iframe id="iframe" src="http://doc.gold.ac.uk/~shuss020/dbtest/www/user_allergies.html" frameborder="0" scrolling="yes"></iframe>
       </div>
     </div>
 

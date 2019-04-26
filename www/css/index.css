@@ -2,6 +2,14 @@
   outline: none;
 }
 
+body {
+    overflow: visible;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 .center {
   display: block;
   margin-left: auto;
@@ -61,6 +69,11 @@
 
 .hidden {
   visibility: hidden;
+}
+
+#iframe {
+    height:90%;
+    width: 100%;
 }
 
 #topMenuContainer {

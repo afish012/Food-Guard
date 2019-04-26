@@ -1,5 +1,6 @@
 app.initialize();
 //getJSON("5000328583839");
+//getJSON("5000184321606");
 
 function getJSON(barcode) {
   //help here (example code) -> https://www.quackit.com/json/tutorial/json_with_http_jquery.cfm
@@ -16,6 +17,20 @@ function getJSON(barcode) {
     } else {
       var product = result.product.product_name;
       var allergens = result.product.allergens_tags;
+      localStorage.ffAllergens = null;
+      localStorage.ffAllergens = allergens;
+      localStorage.ffAllergens = localStorage.ffAllergens.replace(/en:/g, "");
+      localStorage.setObj("ffAllergens", localStorage.ffAllergens.split(","));
+      var ffArray = localStorage.getObj("ffAllergens");
+      var dbAll = getAllergies(localStorage);
+      for(i in ffArray){
+          for(j in dbAll){
+             if(ffArray[i] == dbAll[j]){
+                alert(ffArray[i]);
+             } 
+          }
+      }
+          
       var image = result.product.image_url;
 
       if(image == null){
