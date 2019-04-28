@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <title>Sign Up Page</title>
+    <!--    <link rel="stylesheet" type="text/css" href="css/ionic.css">-->
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#insert").click(function() {
+                var username = $("#username").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+                var dataString = "username=" + username + "&email=" + email + "&password=" + password + "&insert=";
+                console.log(dataString);
+                if ($.trim(username).length > 0 & $.trim(email).length > 0 & $.trim(password).length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/insert.php",
+                        data: dataString,
+                        crossDomain: true,
+                        cache: false,
+                        beforeSend: function() {
+                            $("#insert").val('Connecting...');
+                        },
+                        success: function(data) {
+                            if (data == "success") {
+                                //                            alert("inserted");
+                                console.log("inserted");
+                                console.log(data);
+                                $("#insert").val('submit');
+                            } else if (data == "error") {
+                                alert("error");
+                                console.log("error");
+                                console.log(data);
+                            }
+                        }
+                    });
+                    window.location.replace("login.html");
+                }
+                return false;
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="logo">
+        <div id="logowrapper">
+            <img src="img/logo.png">
+        </div>
+        <!--
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;background-color: green">
+        <h1 class="title">Sign up</h1>
+        <a class="button button-clear" href="readjson.html">Read All Data</a>
+        <a class="button button-clear" href="login.html">Sign in</a>
+    </div>
+-->
+        <br>
+        <br>
+        <div class="list">
+            <input type="hidden" id="id" value="" />
+            <div class="item">
+                <center><input type="text" id="username" value="" placeholder="Enter Username" style="width: 50%; height: 32px; border-radius: 25px; overflow: hidden; outline: none;" /></center>
+            </div>
+            <br>
+            <div class="item">
+                <center><input type="text" id="email" value="" placeholder="Enter Email" style="width: 50%; height: 32px; border-radius: 25px;overflow: hidden; outline: none;" /></center>
+            </div>
+            <br>
+            <div class="item">
+                <center><input type="text" id="password" value="" placeholder="Enter Password" style="width: 50%; height: 32px; border-radius: 25px;overflow: hidden; outline: none;" /></center>
+            </div>
+            <br>
+            <div class="item">
+                <center><input type="button" id="insert" class="button button-block" value="Sign Up" style="width: 25%; height: 32px; border-radius: 25px; outline: none; background-color: white;" /> </center>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

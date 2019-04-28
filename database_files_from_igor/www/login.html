@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log(localStorage);
+            //Clear local login details on new sign in
+            localStorage.clear();
+            localStorage.username = null;
+            localStorage.password = null
+            localStorage.email = null;
+            localStorage.id = null;
+            localStorage.allergies = null;
+            console.log(localStorage);
+            console.log(localStorage.id);
+            //Link to login database on igor
+            var url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/json.php";
+            //Get login database and store as array
+            var result = $.getJSON(url, function(result) {
+                console.log(result);
+            });
+            //On insert compare input to login details in database
+            $("#insert").click(function() {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var found = false;
+                //Check fields are not blank
+                if ($.trim(username).length > 0 & $.trim(password).length > 0) {
+                    console.log("username and password > 1");
+                    //Check username and pass
+                    for (i in result.responseJSON) {
+                        if (username == result.responseJSON[i].username) {
+                            console.log("found username");
+                            found = true;
+                            if (password == result.responseJSON[i].password) {
+                                localStorage.username = username;
+                                localStorage.password = password;
+                                localStorage.email = result.responseJSON[i].email;
+                                localStorage.id = result.responseJSON[i].id;
+                                console.log("found username and password");
+                                console.log(localStorage);
+
+                            }
+                        }
+                    }
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //////////////////////////CODE TO GRAB USER ALLERGIES AND STORE IN LOCAL STORAGE///////////////////////
+                    //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
+                    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv//
+                    //If user is logged in get allergy data from user allergies table
+                    if (localStorage.id != null) {
+
+                        pg_allergies = [];
+
+                        //Get data from allergies table and user_allergies table
+                        var url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/user_allergies.php";
+                        var allergies_url = "http://doc.gold.ac.uk/~shuss020/dbtest/www/php/allergies.php";
+                        $.when(
+                            $.getJSON(url),
+                            $.getJSON(allergies_url)
+                        ).done(function(user_allergies, allergies) {
+                            console.log(user_allergies[0]);
+                            //If current user id is found in user_allergies table, get each allergy id and match with
+                            //name of allergy from the allergies table and then tick checkbox in list
+                            if (localStorage.length != 0) {
+                                for (i in user_allergies[0]) {
+                                    if (localStorage.id == user_allergies[0][i].user_id) {
+                                        for (j in allergies[0]) {
+                                            if (user_allergies[0][i].allergy_id == allergies[0][j].allergy_id) {
+                                                console.log(allergies[0][j].allergy);
+                                                pg_allergies.push(allergies[0][j].allergy);
+                                                console.log(pg_allergies);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            //Copy user allergies to localStorage 
+                            localStorage.allergies = localStorage.setItem('pg_allergies', JSON.stringify(pg_allergies));
+                            //Create object with all user details that is sent to phonegap
+                            user = {
+                                username: localStorage.username,
+                                password: localStorage.password,
+                                id: localStorage.id,
+                                email: localStorage.email,
+                                allergies: ["null"]
+                            };
+                            if (pg_allergies.length >= 1) {
+                                user.allergies = pg_allergies;
+                            }
+                        });
+                    }
+                    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^//
+                    //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||//
+                    //////////////////////////CODE ABOVE TO GRAB USER ALLERGIES AND STORE IN LOCAL STORAGE/////////////////
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    if (found === false) {
+                        console.log("login error - user not found");
+                    }
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="logo">
+        <div id="logowrapper">
+            <img src="img/logo.png">
+        </div>
+        <br>
+        <br>
+        <div class="list">
+            <input type="hidden" id="id" value="" />
+            <div class="item">
+                <center><input type="text" id="username" value="" placeholder="Enter Username" style="width: 50%; height: 32px; border-radius: 25px; overflow: hidden; outline: none;" /></center>
+            </div>
+            <br>
+            <div class="item">
+                <center><input type="text" id="password" value="" placeholder="Enter Password" style="width: 50%; height: 32px; border-radius: 25px;overflow: hidden; outline: none;" /></center>
+            </div>
+            <br>
+            <br>
+            <div class="item">
+                <center><input type="button" id="insert" class="button button-block" value="Sign in" style="width: 25%; height: 32px; border-radius: 25px; outline: none; background-color: white;" /> </center>
+
+            </div>
+            <br>
+            <div class="item">
+                <center>
+                    <p>Not yet registered?</p>
+                </center>
+                <center><a href="index.html">Sign up</a></center>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
